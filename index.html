@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Counsel Finder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#e6f1fe',
+                            100: '#cce3fd',
+                            200: '#99c7fb',
+                            300: '#66abf9',
+                            400: '#338ff7',
+                            500: '#0073f5',
+                            600: '#005cc4',
+                            700: '#004593',
+                            800: '#002e62',
+                            900: '#001731',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <div class="relative">
+        <button id="theme-toggle" class="fixed top-4 right-4 z-50 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-primary-300/50">
+            <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
+            <i class="fas fa-moon text-primary-300 hidden dark:block"></i>
+        </button>
+    </div>
+
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <header class="text-center mb-10 animate-fade-in">
+            <h1 class="text-4xl font-bold text-primary-600 dark:text-primary-400 mb-2">Legal Counsel Finder</h1>
+            <p class="text-gray-600 dark:text-gray-400 text-lg">Find the right lawyer for your specific legal situation</p>
+        </header>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 mb-8 transition-all duration-300 hover:shadow-primary-500/20">
+            <h2 class="text-2xl font-semibold mb-6 text-primary-600 dark:text-primary-400">Describe Your Legal Situation</h2>
+            <form id="legal-form" class="space-y-6">
+                <div class="case-type-container">
+                    <label class="block text-gray-700 dark:text-gray-300 mb-2 text-lg">Case Type</label>
+                    <div class="case-type-selector grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                        <div class="case-type-option" data-value="criminal">
+                            <input type="radio" id="criminal" name="case-type" value="criminal" class="hidden">
+                            <label for="criminal" class="case-option flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer border-2 border-transparent hover:border-primary-400 transition-all">
+                                <i class="fas fa-gavel text-2xl mb-2 text-primary-500"></i>
+                                <span>Criminal Defense</span>
+                            </label>
+                        </div>
+                        <div class="case-type-option" data-value="family">
+                            <input type="radio" id="family" name="case-type" value="family" class="hidden">
+                            <label for="family" class="case-option flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer border-2 border-transparent hover:border-primary-400 transition-all">
+                                <i class="fas fa-users text-2xl mb-2 text-primary-500"></i>
+                                <span>Family Law</span>
+                            </label>
+                        </div>
+                        <div class="case-type-option" data-value="personal-injury">
+                            <input type="radio" id="personal-injury" name="case-type" value="personal-injury" class="hidden">
+                            <label for="personal-injury" class="case-option flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer border-2 border-transparent hover:border-primary-400 transition-all">
+                                <i class="fas fa-ambulance text-2xl mb-2 text-primary-500"></i>
+                                <span>Personal Injury</span>
+                            </label>
+                        </div>
+                        <div class="case-type-option" data-value="business">
+                            <input type="radio" id="business" name="case-type" value="business" class="hidden">
+                            <label for="business" class="case-option flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer border-2 border-transparent hover:border-primary-400 transition-all">
+                                <i class="fas fa-briefcase text-2xl mb-2 text-primary-500"></i>
+                                <span>Business Law</span>
+                            </label>
+                        </div>
+                        <div class="case-type-option" data-value="estate">
+                            <input type="radio" id="estate" name="case-type" value="estate" class="hidden">
+                            <label for="estate" class="case-option flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer border-2 border-transparent hover:border-primary-400 transition-all">
+                                <i class="fas fa-home text-2xl mb-2 text-primary-500"></i>
+                                <span>Estate Planning</span>
+                            </label>
+                        </div>
+                        <div class="case-type-option" data-value="immigration">
+                            <input type="radio" id="immigration" name="case-type" value="immigration" class="hidden">
+                            <label for="immigration" class="case-option flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer border-2 border-transparent hover:border-primary-400 transition-all">
+                                <i class="fas fa-passport text-2xl mb-2 text-primary-500"></i>
+                                <span>Immigration</span>
+                            </label>
+                        </div>
+                        <div class="case-type-option" data-value="other">
+                            <input type="radio" id="other" name="case-type" value="other" class="hidden">
+                            <label for="other" class="case-option flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer border-2 border-transparent hover:border-primary-400 transition-all">
+                                <i class="fas fa-balance-scale text-2xl mb-2 text-primary-500"></i>
+                                <span>Other</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-sm text-primary-500 dark:text-primary-400">
+                        <span id="ai-detection-status">Describe your situation for AI-assisted case type detection</span>
+                    </div>
+                </div>
+                
+                <div class="form-group relative">
+                    <label for="location" class="block text-gray-700 dark:text-gray-300 mb-2 text-lg">Location</label>
+                    <div class="relative">
+                        <i class="fas fa-map-marker-alt absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400"></i>
+                        <input type="text" id="location" class="w-full p-3 pl-10 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-400 focus:border-transparent transition-all" placeholder="City, State">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="situation" class="block text-gray-700 dark:text-gray-300 mb-2 text-lg">Describe Your Situation</label>
+                    <div class="relative">
+                        <textarea id="situation" rows="5" class="w-full p-4 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-400 focus:border-transparent transition-all" placeholder="Please provide details about your legal situation..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="budget" class="block text-gray-700 dark:text-gray-300 mb-2 text-lg">Budget Range</label>
+                    <div class="relative">
+                        <i class="fas fa-dollar-sign absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400"></i>
+                        <select id="budget" class="w-full p-3 pl-10 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg appearance-none focus:ring-2 focus:ring-primary-400 focus:border-transparent transition-all">
+                            <option value="">Select your budget</option>
+                            <option value="low">$1,000 - $5,000</option>
+                            <option value="medium">$5,000 - $15,000</option>
+                            <option value="high">$15,000 - $50,000</option>
+                            <option value="very-high">$50,000+</option>
+                        </select>
+                        <i class="fas fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 pointer-events-none"></i>
+                    </div>
+                </div>
+                
+                <button type="submit" class="w-full bg-primary-600 dark:bg-primary-500 text-white py-4 px-6 rounded-lg text-lg font-semibold hover:bg-primary-700 dark:hover:bg-primary-600 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg flex items-center justify-center">
+                    <i class="fas fa-search mr-2"></i>Find Lawyers
+                </button>
+            </form>
+        </div>
+
+        <div id="results" class="hidden space-y-8 animate-fade-in">
+            <div id="loading" class="text-center py-12 hidden">
+                <div class="loader">
+                    <div class="spinner-outer"></div>
+                    <div class="spinner-inner"></div>
+                </div>
+                <p class="mt-4 text-gray-600 dark:text-gray-400 text-lg">Analyzing your legal situation...</p>
+            </div>
+            
+            <div id="top-recommendation" class="bg-primary-50 dark:bg-primary-900/30 border border-primary-200 dark:border-primary-800 rounded-xl p-8 hidden transform transition-all duration-500 hover:shadow-lg">
+                <h2 class="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-4 flex items-center">
+                    <i class="fas fa-award mr-3 text-primary-500"></i>
+                    Top Recommendation
+                </h2>
+                <div id="top-recommendation-content" class="animate-card-appear"></div>
+            </div>
+            
+            <div id="other-recommendations" class="hidden">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200 flex items-center">
+                    <i class="fas fa-list-alt mr-3 text-primary-500"></i>
+                    Other Recommendations
+                </h2>
+                <div id="recommendations-list" class="space-y-6 md:grid md:grid-cols-2 md:gap-6 md:space-y-0"></div>
+            </div>
+            
+            <p class="mt-10 text-sm text-gray-500 dark:text-gray-400 italic text-center pb-8">I am AI built to give an unbiased recommendation on legal resources. Never under any circumstance should what I say be interpreted as legal advice.</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
